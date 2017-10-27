@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="recall">Reproducir</string>
+    <string name="review">Revisión</string>
+    <string name="toolbar.ResultsAndDigits">Resultados - %s Dígitos</string>
+    <string name="selectChallenge">Selecciona un Reto</string>
+    <string name="digitsPerGroup">%s Dígitos Agrupados</string>
+    <string name="Off">Apagado</string>
+    <string name="memorizationTime">Tiempo para Memorizar</string>
+    <string name="newChallenge">Nuevo Reto</string>
+    <string name="numberOfDigits">Cantidad de Dígitos</string>
+    <string name="Cancel">Cancelar</string>
+    <string name="Add">Añadir</string>
+    <string name="ChallengeDeleted">Reto borrado</string>
+    <string name="Save">Guardar</string>
+    <string name="feedback.EmailSubjectText">Comentarios por Memory Ladder</string>
+    <string name="feedback.EmailMessageBodyText">"Yo he usado la aplicación y quiero decir que: "</string>
+    <string name="challengeList_numDigits_pi">%d Dígitos de Pi</string>
+    <string name="digit_source">Banco de Cifras</string>
+    <string name="pi">π (pi)</string>
+    <string name="random">Números Aleatorios</string>
+    <string name="no_time_limit">Sin Límites</string>
+</resources>

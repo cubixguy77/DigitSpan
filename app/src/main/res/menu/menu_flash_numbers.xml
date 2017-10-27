@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/heart_one"
+        android:icon="@drawable/icon_heart"
+        android:title="Heart One"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/heart_two"
+        android:icon="@drawable/icon_heart"
+        android:title="Heart Two"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/heart_three"
+        android:icon="@drawable/icon_heart"
+        android:title="Heart Three"
+        app:showAsAction="always"
+        />
+
+</menu>

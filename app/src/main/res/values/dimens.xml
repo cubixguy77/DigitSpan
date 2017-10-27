@@ -1,0 +1,51 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="challenge_card.textSize">34sp</dimen>
+    <dimen name="challenge_card.play_button.textSize">24sp</dimen>
+
+    <dimen name="timer.textSize">20sp</dimen>
+
+    <dimen name="number_grid.layout_margin">8dp</dimen>
+    <dimen name="number_grid.verticalSpacing">40dp</dimen>
+    <dimen name="number_grid.cellSize">64dp</dimen>
+
+    <dimen name="memory_cell.textSize">8sp</dimen>
+    <dimen name="recall_cell.textSize">8sp</dimen>
+    <dimen name="review_cell.textSize">6sp</dimen>
+
+    <dimen name="next_group_button.layout_width">80dp</dimen>
+    <dimen name="next_group_button.layout_height">80dp</dimen>
+    <dimen name="next_group_button.layout_margin">16dp</dimen>
+
+    <dimen name="numeric_keyboard.layout_height">300dp</dimen>
+    <dimen name="numeric_keyboard.textSize">22sp</dimen>
+    <dimen name="numeric_keyboard.iconSize">24dp</dimen>
+
+    <dimen name="memory_timer_dialog.arrow.size">50dp</dimen>
+    <dimen name="memory_timer.column_space">20dp</dimen>
+    <dimen name="memory_timer_dialog.margin.top">12dp</dimen>
+    <dimen name="memory_timer_dialog.margin.bottom">16dp</dimen>
+    <dimen name="memory_timer_dialog.margin.left">18dp</dimen>
+    <dimen name="memory_timer_dialog.numeric_text.size">50sp</dimen>
+    <dimen name="memory_timer_dialog.numeric_text.margin">-10dp</dimen>
+    <dimen name="memory_timer_dialog.colon.adjust">24dp</dimen>
+    <dimen name="memory_timer_dialog.label_text.size">18sp</dimen>
+
+    <dimen name="score_panel.height">100dp</dimen>
+    <dimen name="score_panel.top_label.text.size">20sp</dimen>
+    <dimen name="score_panel.top_label.padding.bottom">16dp</dimen>
+
+    <dimen name="score_panel.value.text.size">44sp</dimen>
+    <dimen name="score_panel.value.margin.top">-20dp</dimen>
+
+    <dimen name="score_list.row.height">64dp</dimen>
+    <dimen name="score_list.row.text.size">20sp</dimen>
+    <dimen name="score_list.rank.margin.left">24dp</dimen>
+
+    <dimen name="button.elevation.resting">2dp</dimen>
+
+
+</resources>

@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Flash Numbers</string>
+    <string name="memorization">Memorization</string>
+
+    <string name="challengeList.numDigits">%s Digits</string>
+    <string name="challengeList_numDigits_pi">%d Digits of Pi</string>
+
+    <string name="scoreList.Rank">Rank</string>
+    <string name="scoreList.Score">Score</string>
+    <string name="scoreList.Time">Time</string>
+    <string name="tabLabel.MyScores">My Scores</string>
+    <string name="tabLabel.Results">Results</string>
+    <string name="add_challenge">Add Challenge</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="hours">Hours</string>
+    <string name="minutes">Minutes</string>
+    <string name="seconds">Seconds</string>
+    <string name="play">Play</string>
+    <string name="accuracy">Accuracy</string>
+    <string name="mem_time">Time</string>
+    <string name="digit_grouping">Digit Grouping</string>
+    <string name="memorization_timer">Memorization Timer</string>
+    <string name="recall_timer">Recall Timer</string>
+    <string name="recall">Recall</string>
+    <string name="review">Review</string>
+    <string name="toolbar.ResultsAndDigits">Results - %s Digits</string>
+    <string name="selectChallenge">Select a Challenge</string>
+    <string name="digitsPerGroup">%s Digits Per Group</string>
+    <string name="Off">Off</string>
+    <string name="memorizationTime">Memorization Time</string>
+    <string name="newChallenge">New Challenge</string>
+    <string name="numberOfDigits">Number of Digits</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Add">Add</string>
+    <string name="ChallengeDeleted">Challenge deleted</string>
+    <string name="Save">Save</string>
+    <string name="feedback.EmailSubjectText">Feedback for Memory Ladder</string>
+    <string name="feedback.EmailMessageBodyText">It\'s a great app, but it really needs:</string>
+    <string name="digit_source">Digit Source</string>
+    <string name="random">Random</string>
+    <string name="pi">π (pi)</string>
+    <string name="rate_this_app">Rate This App</string>
+    <string name="no_time_limit">No Limit</string>
+
+
+</resources>

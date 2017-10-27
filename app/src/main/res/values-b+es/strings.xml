@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Números</string>
+    <string name="memorization">Memorizar</string>
+
+    <string name="challengeList.numDigits">%s Dígitos</string>
+
+    <string name="scoreList.Rank">Rango</string>
+    <string name="scoreList.Score">Valoración</string>
+    <string name="scoreList.Time">Tiempo</string>
+    <string name="tabLabel.MyScores">Mi Valoración</string>
+    <string name="tabLabel.Results">Resultados</string>
+    <string name="add_challenge">Añadir Reto</string>
+    <string name="send_feedback">Enviar Comentarios</string>
+    <string name="hours">Horas</string>
+    <string name="minutes">Minutos</string>
+    <string name="seconds">Segundos</string>
+    <string name="play">Jugar</string>
+    <string name="accuracy">Exactitud</string>
+    <string name="mem_time">Tiempo</string>
+    <string name="digit_grouping">Agrupamiento de Dígitos</string>
+    <string name="memorization_timer">Temporizador</string>
+    <string name="recall_timer">Temporizador de Reproducción</string>
+    <string name="rate_this_app">Calificar Aplicación</string>
+
+</resources>

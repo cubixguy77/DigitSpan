@@ -1,0 +1,88 @@
+package com.mastersofmemory.flashnumbers;
+
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
+
+public class NumberFlashTextView extends android.support.v7.widget.AppCompatTextView {
+
+    public NumberFlashTextView(Context context) {
+        super(context);
+    }
+
+    public NumberFlashTextView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public void init() {
+        new NumberFlashTextPresenter(this);
+    }
+
+    public void displayDigit(final int digit) {
+
+        if (getText().length() == 0) { // first digit
+            setText(Integer.toString(digit));
+            animate().alpha(1).setListener(null).setDuration(100).start();
+        }
+        else { // clear out existing digit first
+            animate().alpha(0).setDuration(100).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    setText(Integer.toString(digit));
+                    animate().alpha(1).setListener(null).setDuration(100).start();
+                }
+            }).start();
+        }
+
+        /*
+        setText(Integer.toString(digit));
+
+        animate().alpha(1).setDuration(300).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                animate().alpha(0).setDuration(300).setStartDelay(500).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        //setText("");
+                    }
+                }).start();
+            }
+        }).start();
+        */
+    }
+
+    public void displayDigits(char[] digits) {
+
+    }
+
+    public void displayAnswerResponse(boolean correct) {
+        if (correct) {
+            setTextSize(140f);
+            setText("✔");
+        }
+        else {
+            setTextSize(140f);
+            setText("X");
+        }
+    }
+
+    public void showPreMemorizationState() {
+        setText("");
+    }
+
+    public void showMemorizationState() {
+        setText("");
+        setAlpha(0);
+        setTextSize(140f);
+        setSingleLine();
+    }
+
+    public void showRecallState() {
+        setText("");
+        setAlpha(1);
+        setTextSize(40f);
+        setSingleLine(false);
+    }
+}

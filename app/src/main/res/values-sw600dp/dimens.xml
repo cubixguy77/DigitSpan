@@ -1,0 +1,42 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="challenge_card.textSize">46sp</dimen>
+    <dimen name="challenge_card.play_button.textSize">30sp</dimen>
+
+
+    <dimen name="timer.textSize">30sp</dimen>
+
+    <dimen name="number_grid.layout_margin">16dp</dimen>
+    <dimen name="number_grid.verticalSpacing">16dp</dimen>
+    <dimen name="number_grid.cellSize">80dp</dimen>
+
+    <dimen name="memory_cell.textSize">20sp</dimen>
+    <dimen name="recall_cell.textSize">20sp</dimen>
+    <dimen name="review_cell.textSize">16sp</dimen>
+
+    <dimen name="next_group_button.layout_width">120dp</dimen>
+    <dimen name="next_group_button.layout_height">120dp</dimen>
+    <dimen name="next_group_button.layout_margin">16dp</dimen>
+
+    <dimen name="numeric_keyboard.layout_height">350dp</dimen>
+    <dimen name="numeric_keyboard.textSize">30sp</dimen>
+    <dimen name="numeric_keyboard.iconSize">48dp</dimen>
+
+    <dimen name="memory_timer_dialog.arrow.size">50dp</dimen>
+    <dimen name="memory_timer.column_space">40dp</dimen>
+    <dimen name="memory_timer_dialog.margin.top">30dp</dimen>
+    <dimen name="memory_timer_dialog.margin.bottom">30dp</dimen>
+    <dimen name="memory_timer_dialog.margin.left">70dp</dimen>
+    <dimen name="memory_timer_dialog.numeric_text.size">50sp</dimen>
+    <dimen name="memory_timer_dialog.numeric_text.margin">-10dp</dimen>
+    <dimen name="memory_timer_dialog.colon.adjust">24dp</dimen>
+
+
+    <dimen name="score_list.row.height">88dp</dimen>
+    <dimen name="score_list.row.text.size">26sp</dimen>
+    <dimen name="score_list.rank.margin.left">48dp</dimen>
+
+</resources>

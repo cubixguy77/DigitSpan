@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="LinearLayout"
+    tools:orientation="vertical">
+
+    <TextView
+        android:id="@+id/flashNumberDigitsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textSize="24sp"
+        android:text="8 Digits"
+        tools:visibility="visible"
+        />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:visibility="visible"
+            android:background="@drawable/shape_rounded_corners"
+            />
+
+        <com.mastersofmemory.flashnumbers.NumberFlashTextView
+            android:id="@+id/flashNumberPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="0dp"
+            android:gravity="center"
+            android:alpha="0"
+            tools:text="1"
+            tools:alpha="1"
+            android:textSize="140sp"
+            android:textColor="#fff"
+            />
+
+        <ImageView
+            android:id="@+id/flashStartArrow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:visibility="visible"
+            app:srcCompat="@drawable/ic_arrow_right"
+            />
+
+
+    </FrameLayout>
+
+</merge>

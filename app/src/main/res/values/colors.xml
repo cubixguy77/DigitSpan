@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="highlightRecallActions">#e4e4e4</color>
+    <color name="highlightRecallDigits">#efefef</color>
+
+    <color name="colorPrimary">#4CAF50</color>
+    <color name="colorPrimaryDark">#388E3C</color>
+    <color name="colorPrimaryLight">#C8E6C9</color>
+
+
+    <color name="colorAccent">#8BC34A</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#727272</color>
+    <color name="icons">#FFFFFF</color>
+
+    <color name="score_panel.top_label">#ffffff</color>
+    <color name="score_panel.value">#ffffff</color>
+
+    <color name="leaderboard.row.background.standard">@color/blue_tertiary</color>
+
+    <color name="results.tab.standard">@color/white</color>
+    <color name="results.tab.selected">@color/yellow</color>
+
+    <color name="divider">#B6B6B6</color>
+    <color name="red">#F44336</color>
+    <color name="yellow">#FFC107</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue_tertiary">#E3F2FD</color>
+    <color name="blue_quaternary">#BBDEFB</color>
+</resources>

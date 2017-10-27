@@ -1,0 +1,24 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="timer.textSize">16sp</dimen>
+
+    <dimen name="number_grid.layout_margin">8dp</dimen>
+    <dimen name="number_grid.verticalSpacing">30dp</dimen>
+    <dimen name="number_grid.cellSize">56dp</dimen>
+
+    <dimen name="memory_cell.textSize">8sp</dimen>
+    <dimen name="recall_cell.textSize">8sp</dimen>
+    <dimen name="review_cell.textSize">6sp</dimen>
+
+    <dimen name="next_group_button.layout_width">60dp</dimen>
+    <dimen name="next_group_button.layout_height">60dp</dimen>
+    <dimen name="next_group_button.layout_margin">8dp</dimen>
+
+    <dimen name="numeric_keyboard.layout_height">150dp</dimen>
+    <dimen name="numeric_keyboard.textSize">22sp</dimen>
+    <dimen name="numeric_keyboard.iconSize">24dp</dimen>
+
+</resources>
