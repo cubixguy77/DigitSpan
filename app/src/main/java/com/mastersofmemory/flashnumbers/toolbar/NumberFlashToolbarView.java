@@ -1,13 +1,20 @@
-package com.mastersofmemory.flashnumbers;
+package com.mastersofmemory.flashnumbers.toolbar;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-import com.mastersofmemory.flashnumbers.toolbar.BaseToolbarView;
+import com.mastersofmemory.flashnumbers.NumberFlashBus;
+import com.mastersofmemory.flashnumbers.NumberFlashConfig;
+import com.mastersofmemory.flashnumbers.NumberFlashGameStateListener;
+import com.mastersofmemory.flashnumbers.NumberFlashResult;
+import com.mastersofmemory.flashnumbers.R;
+import com.mastersofmemory.flashnumbers.SaveInstanceStateListener;
 
 public class NumberFlashToolbarView extends BaseToolbarView implements NumberFlashGameStateListener, SaveInstanceStateListener {
 
@@ -32,7 +39,13 @@ public class NumberFlashToolbarView extends BaseToolbarView implements NumberFla
     public void onCreateOptionsMenu(Menu menu, Context context) {
         System.out.println("onCreateOptionsMenu");
         ((AppCompatActivity) context).getMenuInflater().inflate(R.menu.menu_flash_numbers, menu);
-        setTitle("Digit Span");
+        setBarTitle("Flash Numbers");
+        setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Settings clicked");
+            }
+        });
     }
 
     public void onPrepareOptionsMenu(Menu menu) {

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mastersofmemory.flashnumbers.keyboard.KeyboardPresenter;
 import com.mastersofmemory.flashnumbers.keyboard.NumberFlashKeyboard;
 
 import butterknife.BindView;
@@ -56,14 +57,19 @@ public class NumberFlashFragment extends Fragment implements NumberFlashGameStat
     }
 
     private void initializeViews() {
-        flashNumberPanel.init();
-        keyboard.init();
-        keyboard.subscribe();
+        flashNumberPanel.init(new NumberFlashTextPresenter(flashNumberPanel));
+        keyboard.init(new KeyboardPresenter(keyboard));
     }
 
     @Override
     public void onLoad(NumberFlashConfig config, Bundle savedInstanceState) {
         Log.d("ML.NumberFlashFragment", "onLoad()");
+
+        GameData data = new GameData(config);
+
+        flashNumberPanel.getPresenter().setData(data);
+        keyboard.getPresenter().setData(data);
+
         flashNumberDigitsText.setText(config.getNumInitialDigits() + " Digits");
         startButton.setVisibility(NumberFlashBus.gameState == GameState.PRE_MEMORIZATION ? View.VISIBLE : View.GONE);
         startButton.setEnabled(NumberFlashBus.gameState == GameState.PRE_MEMORIZATION);

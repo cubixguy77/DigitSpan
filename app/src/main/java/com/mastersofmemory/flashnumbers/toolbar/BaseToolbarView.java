@@ -25,7 +25,7 @@ public abstract class BaseToolbarView extends android.support.v7.widget.Toolbar 
         this.supportActionBar = context.getSupportActionBar();
         if (supportActionBar != null) {
             supportActionBar.setDisplayHomeAsUpEnabled(true);
-            supportActionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
+            supportActionBar.setHomeAsUpIndicator(R.drawable.icon_settings);
         }
     }
 

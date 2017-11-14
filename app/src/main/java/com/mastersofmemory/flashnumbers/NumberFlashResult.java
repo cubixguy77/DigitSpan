@@ -5,7 +5,7 @@ public class NumberFlashResult {
     private boolean isCorrect;
     private final int numDigitsAttempted;
 
-    NumberFlashResult(char[] memory, char[] recall) {
+    public NumberFlashResult(char[] memory, char[] recall) {
         this.isCorrect = verifyResult(memory, recall);
         this.numDigitsAttempted = memory.length;
     }

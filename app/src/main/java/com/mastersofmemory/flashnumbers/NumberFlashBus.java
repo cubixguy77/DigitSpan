@@ -2,9 +2,11 @@ package com.mastersofmemory.flashnumbers;
 
 import android.os.Bundle;
 
+import com.mastersofmemory.flashnumbers.settings.Settings;
+
 import java.util.ArrayList;
 
-public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanceStateListener, FlashNumbers.Keyboard.UserKeyboardActions {
+public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanceStateListener, RecallDataChangeListener {
 
     private static NumberFlashBus instance = null;
     private ArrayList<Object> observers;
@@ -136,19 +138,10 @@ public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanc
     }
 
     @Override
-    public void onKeyPress(char digit) {
+    public void onRecallDataChanged(char[] recallData) {
         for (Object observer : observers) {
-            if (observer != null && observer instanceof FlashNumbers.Keyboard.UserKeyboardActions) {
-                ((FlashNumbers.Keyboard.UserKeyboardActions) observer).onKeyPress(digit);
-            }
-        }
-    }
-
-    @Override
-    public void onBackSpace() {
-        for (Object observer : observers) {
-            if (observer != null && observer instanceof FlashNumbers.Keyboard.UserKeyboardActions) {
-                ((FlashNumbers.Keyboard.UserKeyboardActions) observer).onBackSpace();
+            if (observer != null && observer instanceof RecallDataChangeListener) {
+                ((RecallDataChangeListener) observer).onRecallDataChanged(recallData);
             }
         }
     }

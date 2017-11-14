@@ -3,27 +3,23 @@ package com.mastersofmemory.flashnumbers;
 import android.os.Bundle;
 import android.os.Handler;
 
-class NumberFlashTextPresenter implements NumberFlashGameStateListener, FlashNumbers.Keyboard.UserKeyboardActions {
+class NumberFlashTextPresenter implements NumberFlashGameStateListener, RecallDataChangeListener {
 
     private NumberFlashTextView view;
-    private int numDigitsEnteredByUser;
-    private int numDigits;
-    private char[] memoryDigits;
-    private char[] recallDigits;
-    private final int millisPerDigit = 700;
+    private GameData data;
 
     NumberFlashTextPresenter(NumberFlashTextView view) {
         this.view = view;
         NumberFlashBus.getBus().subscribe(this);
     }
 
+    public void setData(GameData data) {
+        this.data = data;
+    }
+
     @Override
     public void onLoad(NumberFlashConfig config, Bundle savedInstanceState) {
-        this.numDigits = config.getNumInitialDigits();
         this.view.showPreMemorizationState();
-        this.numDigitsEnteredByUser = 0;
-        this.memoryDigits = MemoryDataSetFactory.getDecimalNumberData(config.getNumInitialDigits(), true);
-        this.recallDigits = new char[numDigits];
     }
 
     @Override
@@ -38,13 +34,13 @@ class NumberFlashTextPresenter implements NumberFlashGameStateListener, FlashNum
             @Override
             public void run()
             {
-                if (digitNum >= numDigits) {
+                if (digitNum >= data.getNumDigitsToAttempt()) {
                     NumberFlashBus.getBus().onTransitionToRecall();
                     return;
                 }
 
-                view.displayDigit(Character.getNumericValue(memoryDigits[digitNum++]));
-                handler.postDelayed(this, millisPerDigit);
+                view.displayDigit(Character.getNumericValue(data.getMemoryDigit(digitNum++)));
+                handler.postDelayed(this, data.getConfig().getDigitSpeed().getMillisToDisplayDigit());
             }
         }, 0);
     }
@@ -60,9 +56,7 @@ class NumberFlashTextPresenter implements NumberFlashGameStateListener, FlashNum
     }
 
     @Override
-    public void onPlayAgain(NumberFlashConfig config) {
-
-    }
+    public void onPlayAgain(NumberFlashConfig config) {}
 
     @Override
     public void onGameOver() {
@@ -74,47 +68,8 @@ class NumberFlashTextPresenter implements NumberFlashGameStateListener, FlashNum
         view = null;
     }
 
-
-
-
     @Override
-    public void onKeyPress(char digit) {
-        if (numDigitsEnteredByUser >= numDigits) // User entering keys furiously
-            return;
-
-        numDigitsEnteredByUser++;
-        view.setText(view.getText() + Character.toString(digit) + (numDigitsEnteredByUser % 10 == 0 ? "\n" : ""));
-        recallDigits[numDigitsEnteredByUser-1] = digit;
-
-        if (numDigitsEnteredByUser >= numDigits) {
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    NumberFlashBus.getBus().onRecallComplete(new NumberFlashResult(memoryDigits, recallDigits));
-                }
-            }, 300);
-        }
-    }
-
-    @Override
-    public void onBackSpace() {
-        if (numDigitsEnteredByUser == 0)
-            return;
-
-        CharSequence text = view.getText().toString();
-
-        if (text.charAt(text.length()-1) == '\n') {
-            text = text.subSequence(0, text.length() - 2);
-        }
-        else {
-            text = text.subSequence(0, text.length() - 1);
-        }
-
-        view.setText(text);
-
-        numDigitsEnteredByUser--;
+    public void onRecallDataChanged(char[] recallData) {
+        view.refreshRecallData(recallData);
     }
 }

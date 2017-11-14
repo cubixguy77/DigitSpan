@@ -1,6 +1,5 @@
 package com.mastersofmemory.flashnumbers;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -8,14 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+
+import com.mastersofmemory.flashnumbers.settings.SettingLoaderImpl;
+import com.mastersofmemory.flashnumbers.settings.Settings;
+import com.mastersofmemory.flashnumbers.toolbar.NumberFlashToolbarView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NumberFlashActivity extends AppCompatActivity implements NumberFlashGameStateListener {
 
-    @BindView(R.id.toolbar) NumberFlashToolbarView toolbar;
+    @BindView(R.id.toolbar)
+    NumberFlashToolbarView toolbar;
 
     int n=4;
 
@@ -54,8 +57,9 @@ public class NumberFlashActivity extends AppCompatActivity implements NumberFlas
         super.onStart();
         Log.d("ML.NumberFlashActivity", "onStart()");
 
-        /* TODO: Restore config from user preferences */
-        this.onChallengeLoaded(null);
+        SettingLoaderImpl settingLoader = new SettingLoaderImpl();
+        Settings settings = settingLoader.getSettings(this);
+        this.onChallengeLoaded(settings);
     }
 
     /*
@@ -227,28 +231,18 @@ public class NumberFlashActivity extends AppCompatActivity implements NumberFlas
     @Override
     public void onShutdown() {}
 
-    public void onChallengeLoaded(final Challenge challenge) {
+    public void onChallengeLoaded(final Settings settings) {
         //Log.d("ML.NumberFlashActivity", "onChallengeLoaded(): " + challenge.getTitle());
 
+        NumberFlashBus.getBus().onLoad(new NumberFlashConfig(settings), null);
+
+        /*
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                NumberFlashBus.getBus().onLoad(new NumberFlashConfig(4), null);
+                NumberFlashBus.getBus().onLoad(new NumberFlashConfig(settings), null);
             }
-        }, 50);
-    }
-
-
-
-    /* full screen mode */
-    private void makeFullScreen() {
-        if(Build.VERSION.SDK_INT < 19){
-            View v = this.getWindow().getDecorView();
-            v.setSystemUiVisibility(View.GONE);
-        }
-        else {
-            View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        }
+        }, 500);
+        */
     }
 }

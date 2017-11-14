@@ -8,17 +8,17 @@ import android.util.AttributeSet;
 
 public class NumberFlashTextView extends android.support.v7.widget.AppCompatTextView {
 
+    private NumberFlashTextPresenter presenter;
+
     public NumberFlashTextView(Context context) {
         super(context);
     }
+    public NumberFlashTextView(Context context, @Nullable AttributeSet attrs) { super(context, attrs); }
 
-    public NumberFlashTextView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+    public void init(NumberFlashTextPresenter presenter) {
+        this.presenter = presenter;
     }
-
-    public void init() {
-        new NumberFlashTextPresenter(this);
-    }
+    public NumberFlashTextPresenter getPresenter() { return this.presenter; }
 
     public void displayDigit(final int digit) {
 
@@ -53,10 +53,6 @@ public class NumberFlashTextView extends android.support.v7.widget.AppCompatText
         */
     }
 
-    public void displayDigits(char[] digits) {
-
-    }
-
     public void displayAnswerResponse(boolean correct) {
         if (correct) {
             setTextSize(140f);
@@ -84,5 +80,9 @@ public class NumberFlashTextView extends android.support.v7.widget.AppCompatText
         setAlpha(1);
         setTextSize(40f);
         setSingleLine(false);
+    }
+
+    public void refreshRecallData(char[] recallData) {
+        setText(new String(recallData));
     }
 }
