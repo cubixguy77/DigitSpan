@@ -1,5 +1,7 @@
 package com.mastersofmemory.flashnumbers;
 
+import android.os.Bundle;
+
 public class GameData {
 
     private NumberFlashConfig config;
@@ -10,13 +12,23 @@ public class GameData {
     private int numLivesRemaining;
     private int numDigitsAttempted;
 
-    GameData(NumberFlashConfig config) {
+    GameData(NumberFlashConfig config, Bundle bundle) {
         this.config = config;
         this.numDigitsRecalled = 0;
-        this.numDigitsAchieved = 0;
-        this.numLivesRemaining = 3;
-        this.numDigitsAttempted = config.getNumInitialDigits();
+        this.numDigitsAchieved = bundle == null ? 0 : bundle.getInt("GameData.numDigitsAchieved", 0);
+        this.numLivesRemaining = bundle == null ? 3 : bundle.getInt("GameData.numLivesRemaining", 3);
+        this.numDigitsAttempted = bundle == null ? config.getNumInitialDigits() : bundle.getInt("GameData.numDigitsAttempted", config.getNumInitialDigits());
         initializeMemoryRecallData(numDigitsAttempted);
+    }
+
+    Bundle saveToBundle(Bundle bundle) {
+        bundle.putCharArray("GameData.memoryDigits", memoryDigits);
+        bundle.putCharArray("GameData.recallDigits", recallDigits);
+        bundle.putInt("GameData.numDigitsRecalled", numDigitsRecalled);
+        bundle.putInt("GameData.numDigitsAchieved", numDigitsAchieved);
+        bundle.putInt("GameData.numLivesRemaining", numLivesRemaining);
+        bundle.putInt("GameData.numDigitsAttempted", numDigitsAttempted);
+        return bundle;
     }
 
     private void initializeMemoryRecallData(int numDigits) {

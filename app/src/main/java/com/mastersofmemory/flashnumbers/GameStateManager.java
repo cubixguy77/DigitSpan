@@ -1,8 +1,9 @@
 package com.mastersofmemory.flashnumbers;
 
+import android.os.Bundle;
 import android.os.Handler;
 
-public class GameStateManager implements NumberFlashGameStateListener {
+public class GameStateManager implements NumberFlashGameStateListener, SaveInstanceStateListener {
 
     private GameData data;
 
@@ -69,4 +70,14 @@ public class GameStateManager implements NumberFlashGameStateListener {
 
     @Override
     public void onShutdown() {}
+
+    @Override
+    public void onRestoreInstanceState(Bundle inState) {
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState = data.saveToBundle(outState);
+    }
 }

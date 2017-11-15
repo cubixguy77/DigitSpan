@@ -15,48 +15,38 @@ import butterknife.ButterKnife;
 public class NumberFlashActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar) NumberFlashToolbarView toolbar;
+    GameData data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash_numbers);
         ButterKnife.bind(this);
-
-        if (savedInstanceState != null) {
-            Log.d("ML.NumberFlashActivity", "onCreate(): with restore");
-            NumberFlashBus.gameState = (GameState) savedInstanceState.getSerializable("GameState");
-        }
-        else {
-            Log.d("ML.NumberFlashActivity", "onCreate()");
-            NumberFlashBus.gameState = GameState.PRE_MEMORIZATION;
-        }
-
         toolbar.init(this);
         NumberFlashBus.getBus().subscribe(this);
+        loadConfig(savedInstanceState);
+    }
+
+    private void loadConfig(Bundle savedInstanceState) {
+        SettingLoaderImpl settingLoader = new SettingLoaderImpl();
+        Settings settings = settingLoader.getSettings(this);
+        NumberFlashConfig config = new NumberFlashConfig(settings);
+        data = new GameData(config, savedInstanceState);
+        new GameStateManager(data);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         Log.d("ML.NumberFlashActivity", "onStart()");
-
-        SettingLoaderImpl settingLoader = new SettingLoaderImpl();
-        Settings settings = settingLoader.getSettings(this);
-        this.onLoad(new NumberFlashConfig(settings), null);
-    }
-
-    public void onLoad(NumberFlashConfig config, Bundle bundle) {
-        GameData data = new GameData(config);
-        NumberFlashBus.getBus().onPreMemorization(data);
-        new GameStateManager(data);
     }
 
     /*
      * This method is called between onStart() and onPostCreate(Bundle).
      */
     @Override
-    protected void onRestoreInstanceState(Bundle inState) {
-        super.onRestoreInstanceState(inState);
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
         Log.d("ML.NumberFlashActivity", "onRestoreInstanceState()");
     }
 
@@ -109,6 +99,7 @@ public class NumberFlashActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         toolbar.onPrepareOptionsMenu(menu);
+        NumberFlashBus.getBus().onPreMemorization(data);
         return true;
     }
 }
