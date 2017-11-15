@@ -19,10 +19,6 @@ public class DigitViewerPresenter implements DigitViewer.Presenter, NumberFlashG
         NumberFlashBus.getBus().subscribe(this);
     }
 
-    public void setData(GameData data) {
-        this.data = data;
-    }
-
     @Override
     public void onPreMemorization(GameData data) {
         this.data = data;
@@ -81,9 +77,6 @@ public class DigitViewerPresenter implements DigitViewer.Presenter, NumberFlashG
         view.refreshRecallData(recallData);
     }
 
-
-
-
     @Override
     public void onStartClick() {
         view.showCountdown();
@@ -91,7 +84,9 @@ public class DigitViewerPresenter implements DigitViewer.Presenter, NumberFlashG
 
     @Override
     public void onResetClick() {
-        // TODO: Propagate this click to the model
+        data.resetTo(data.getConfig().getNumInitialDigits());
+        data.resetLives();
+        NumberFlashBus.getBus().onPreMemorization(data);
     }
 
     @Override

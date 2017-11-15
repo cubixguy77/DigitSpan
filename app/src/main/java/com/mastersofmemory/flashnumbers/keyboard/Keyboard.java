@@ -12,7 +12,6 @@ public interface Keyboard {
     interface Presenter {
         void onKeyPress(char digit);
         void onBackspacePress();
-        void setData(GameData data);
     }
 
 }

@@ -37,7 +37,7 @@
             android:background="@drawable/shape_rounded_corners"
             />
 
-        <com.mastersofmemory.flashnumbers.NumberFlashTextView
+        <com.mastersofmemory.flashnumbers.digitviewer.NumberFlashTextView
             android:id="@+id/flashNumberPanel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

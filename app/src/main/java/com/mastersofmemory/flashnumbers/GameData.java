@@ -38,7 +38,7 @@ public class GameData {
     }
 
     public void eraseLastDigit() {
-        recallDigits[this.numDigitsRecalled--] = '\u0000';
+        recallDigits[--numDigitsRecalled] = '\u0000';
         notifyRecallDataChanged();
     }
 
@@ -72,6 +72,10 @@ public class GameData {
         return numDigitsAchieved;
     }
 
+    public void resetLives() {
+        this.numLivesRemaining = 3;
+    }
+
     void loseLife() {
         NumberFlashBus.getBus().onLifeLost(--this.numLivesRemaining);
     }
@@ -80,7 +84,7 @@ public class GameData {
         return this.numLivesRemaining;
     }
 
-    void resetTo(int numDigitsToAttempt) {
+    public void resetTo(int numDigitsToAttempt) {
         this.numDigitsAttempted = numDigitsToAttempt;
         this.numDigitsRecalled = 0;
         this.initializeMemoryRecallData(numDigitsAttempted);

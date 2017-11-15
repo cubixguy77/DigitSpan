@@ -13,10 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mastersofmemory.flashnumbers.GameData;
 import com.mastersofmemory.flashnumbers.GameState;
 import com.mastersofmemory.flashnumbers.NumberFlashBus;
-import com.mastersofmemory.flashnumbers.NumberFlashTextView;
 import com.mastersofmemory.flashnumbers.R;
 import com.mastersofmemory.flashnumbers.keyboard.KeyboardPresenter;
 import com.mastersofmemory.flashnumbers.keyboard.NumberFlashKeyboard;
@@ -39,15 +37,11 @@ public class DigitView extends Fragment implements DigitViewer.View {
     public void setPresenter(DigitViewer.Presenter presenter) {
         this.presenter = presenter;
     }
-    public void setData(GameData data) {
-        flashNumberPanel.getPresenter().setData(data);
-        keyboard.getPresenter().setData(data);
-    }
 
     @Override
     public void showPreMemorizationState(int numDigitsToAttempt) {
         flashNumberPanel.showPreMemorizationState();
-        flashNumberDigitsText.setText(numDigitsToAttempt + " Digits");
+        flashNumberDigitsText.setText(String.format(getString(R.string.numDigits), numDigitsToAttempt));
         startButton.setVisibility(View.VISIBLE);
         startButton.setEnabled(true);
         startButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_right));
@@ -107,7 +101,7 @@ public class DigitView extends Fragment implements DigitViewer.View {
     @Override
     public void showGameOverState(int numDigitsAchieved) {
         flashNumberPanel.showGameOverState();
-        flashNumberDigitsText.setText("You got " + numDigitsAchieved + " digits!");
+        flashNumberDigitsText.setText(String.format(getString(R.string.numDigitsAchieved), numDigitsAchieved));
         startButton.setImageDrawable(getResources().getDrawable(R.drawable.icon_replay));
         startButton.setVisibility(View.VISIBLE);
         startButton.setEnabled(true);
@@ -138,7 +132,7 @@ public class DigitView extends Fragment implements DigitViewer.View {
     }
 
     private void initializeViews() {
-        flashNumberPanel.init(new DigitViewerPresenter(this));
+        new DigitViewerPresenter(this);
         keyboard.init(new KeyboardPresenter(keyboard));
     }
 
@@ -148,7 +142,7 @@ public class DigitView extends Fragment implements DigitViewer.View {
         if (NumberFlashBus.gameState == GameState.PRE_MEMORIZATION) {
             presenter.onStartClick();
         }
-        else if (NumberFlashBus.gameState == GameState.REVIEW) {
+        else if (NumberFlashBus.gameState == GameState.RESULTS) {
             presenter.onResetClick();
         }
     }

@@ -17,10 +17,6 @@ public class KeyboardPresenter implements Keyboard.Presenter, NumberFlashGameSta
         NumberFlashBus.getBus().subscribe(this);
     }
 
-    public void setData(GameData data) {
-        this.data = data;
-    }
-
     @Override
     public void onKeyPress(char digit) {
         if (data.getNumDigitsRecalled() >= data.getNumDigitsToAttempt()) // User entering keys furiously

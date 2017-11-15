@@ -19,7 +19,7 @@ public class NumberFlashConfig {
         this.digitSpeed = settings.getDigitSpeedSetting();
     }
 
-    int getNumInitialDigits() {
+    public int getNumInitialDigits() {
         return this.numInitialDigits;
     }
 

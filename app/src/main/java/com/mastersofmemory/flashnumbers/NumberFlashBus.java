@@ -1,6 +1,7 @@
 package com.mastersofmemory.flashnumbers;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.mastersofmemory.flashnumbers.toolbar.LifeListener;
 
@@ -39,14 +40,11 @@ public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanc
     }
 
     static void unsubscribeAll() {
-        System.out.println("NumberFlashBus.unSubscribeAll()");
+        Log.d("ML.NumberFlashBus", "unsubscribeAll()");
         if (NumberFlashBus.instance != null) {
             NumberFlashBus.instance.observers.clear();
             NumberFlashBus.instance = null;
         }
-    }
-
-    static void destroy() {
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.mastersofmemory.flashnumbers;
+package com.mastersofmemory.flashnumbers.digitviewer;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -6,21 +6,12 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
-import com.mastersofmemory.flashnumbers.digitviewer.DigitViewerPresenter;
-
 public class NumberFlashTextView extends android.support.v7.widget.AppCompatTextView {
-
-    private DigitViewerPresenter presenter;
 
     public NumberFlashTextView(Context context) {
         super(context);
     }
     public NumberFlashTextView(Context context, @Nullable AttributeSet attrs) { super(context, attrs); }
-
-    public void init(DigitViewerPresenter presenter) {
-        this.presenter = presenter;
-    }
-    public DigitViewerPresenter getPresenter() { return this.presenter; }
 
     public void displayDigit(final int digit) {
 

@@ -1,11 +1,9 @@
 package com.mastersofmemory.flashnumbers;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import com.mastersofmemory.flashnumbers.settings.SettingLoaderImpl;
 import com.mastersofmemory.flashnumbers.settings.Settings;
@@ -14,13 +12,9 @@ import com.mastersofmemory.flashnumbers.toolbar.NumberFlashToolbarView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NumberFlashActivity extends AppCompatActivity implements NumberFlashGameStateListener {
+public class NumberFlashActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar) NumberFlashToolbarView toolbar;
-
-    private static int activityInstanceCount = 0;
-    private boolean destroyActivity = true;
-    private GameData data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +32,6 @@ public class NumberFlashActivity extends AppCompatActivity implements NumberFlas
         }
 
         toolbar.init(this);
-
-        setupSubscriptions();
-
-        activityInstanceCount++;
-    }
-
-    private void setupSubscriptions() {
-        toolbar.subscribe();
         NumberFlashBus.getBus().subscribe(this);
     }
 
@@ -56,7 +42,7 @@ public class NumberFlashActivity extends AppCompatActivity implements NumberFlas
 
         SettingLoaderImpl settingLoader = new SettingLoaderImpl();
         Settings settings = settingLoader.getSettings(this);
-        this.onLoad(new NumberFlashConfig(settings));
+        this.onLoad(new NumberFlashConfig(settings), null);
     }
 
     /*
@@ -91,7 +77,6 @@ public class NumberFlashActivity extends AppCompatActivity implements NumberFlas
         super.onSaveInstanceState(outState);
         Log.d("ML.NumberFlashActivity", "onSaveInstanceState()");
         outState.putSerializable("GameState", NumberFlashBus.gameState);
-        destroyActivity = false;
         NumberFlashBus.getBus().onSaveInstanceState(outState);
     }
 
@@ -106,29 +91,8 @@ public class NumberFlashActivity extends AppCompatActivity implements NumberFlas
         super.onDestroy();
         Log.d("ML.NumberFlashActivity", "onDestroy()");
 
-        /* If the user decides to play again, then a new activity will be placed on top of the current one
-         * This means that the current activity's onStop() and onDestroy() aren't called until
-         * the new activity has already loaded all the way to onResume().
-         * This check will prevent us from removing the new activity's subscribers
-         */
-        if (activityInstanceCount <= 1) {
-            Log.d("ML.NumberFlashActivity", "onDestroy(unsubscribe all)");
-            NumberFlashBus.unsubscribeAll();
-        }
-
-        if (destroyActivity) {
-            Log.d("ML.NumberFlashActivity", "onDestroy(destroy bus!)");
-            NumberFlashBus.getBus().onShutdown();
-            NumberFlashBus.destroy();
-        }
-
-        activityInstanceCount--;
-    }
-
-    @Override
-    public void onBackPressed() {
-        destroyActivity = true;
-        finish();
+        NumberFlashBus.unsubscribeAll();
+        NumberFlashBus.getBus().onShutdown();
     }
 
     @Override
@@ -143,78 +107,9 @@ public class NumberFlashActivity extends AppCompatActivity implements NumberFlas
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == android.R.id.home) {
-            this.onBackPressed();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
-
-
-    ////////// Game State Life Cycle Listener ////////////
-
-    public void onLoad(NumberFlashConfig config) {
-        data = new GameData(config);
+    public void onLoad(NumberFlashConfig config, Bundle bundle) {
+        GameData data = new GameData(config);
         NumberFlashBus.getBus().onPreMemorization(data);
+        new GameStateManager(data);
     }
-
-    @Override
-    public void onPreMemorization(GameData data) {}
-
-    @Override
-    public void onMemorizationStart() {}
-
-    @Override
-    public void onRecallStart() {}
-
-    @Override
-    public void onRecallComplete(final NumberFlashResult result) {
-
-        if (data.getNumLivesRemaining() == 1 && !result.isCorrect()) {
-            data.loseLife();
-
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    NumberFlashBus.getBus().onGameOver();
-                }
-            }, 1500);
-
-            return;
-        }
-        else if (!result.isCorrect()) {
-            data.loseLife();
-        }
-
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                NumberFlashBus.gameState = GameState.PRE_MEMORIZATION;
-                data.resetTo(result.isCorrect() ? data.getNumDigitsToAttempt() + 1 : data.getNumDigitsToAttempt() - 1);
-                NumberFlashBus.getBus().onPreMemorization(data);
-            }
-        }, 1500);
-    }
-
-    @Override
-    public void onGameOver() {
-        NumberFlashBus.gameState = GameState.REVIEW;
-    }
-
-    @Override
-    public void onShutdown() {}
 }

@@ -23,8 +23,6 @@ public class NumberFlashKeyboard extends TableLayout implements Keyboard.View {
         this.presenter = presenter;
     }
 
-    public Keyboard.Presenter getPresenter() { return this.presenter; }
-
     @Override
     public void enable() {
         setIsEnabled(true);
