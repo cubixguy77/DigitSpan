@@ -89,7 +89,7 @@ public class NumberFlashTextView extends android.support.v7.widget.AppCompatText
     private void loadScreenSize() {
         if (displayWidthDP == 0) {
             DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-            displayWidthDP = displayMetrics.widthPixels / displayMetrics.density;
+            displayWidthDP = Math.min(displayMetrics.widthPixels, displayMetrics.heightPixels) / displayMetrics.density;
         }
     }
 }
