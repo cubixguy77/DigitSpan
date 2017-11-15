@@ -9,7 +9,7 @@ public class NumberFlashConfig {
     private DigitSpeedSetting digitSpeed;
     private int numInitialDigits;
 
-    NumberFlashConfig(int numInitialDigits) {
+    public NumberFlashConfig(int numInitialDigits) {
         this.numInitialDigits = numInitialDigits;
         this.digitSpeed = new DigitSpeedSetting(DigitSpeed.MEDIUM);
     }
@@ -23,7 +23,7 @@ public class NumberFlashConfig {
         return this.numInitialDigits;
     }
 
-    DigitSpeedSetting getDigitSpeed() {
+    public DigitSpeedSetting getDigitSpeed() {
         return digitSpeed;
     }
 }

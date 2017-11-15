@@ -6,19 +6,21 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
+import com.mastersofmemory.flashnumbers.digitviewer.DigitViewerPresenter;
+
 public class NumberFlashTextView extends android.support.v7.widget.AppCompatTextView {
 
-    private NumberFlashTextPresenter presenter;
+    private DigitViewerPresenter presenter;
 
     public NumberFlashTextView(Context context) {
         super(context);
     }
     public NumberFlashTextView(Context context, @Nullable AttributeSet attrs) { super(context, attrs); }
 
-    public void init(NumberFlashTextPresenter presenter) {
+    public void init(DigitViewerPresenter presenter) {
         this.presenter = presenter;
     }
-    public NumberFlashTextPresenter getPresenter() { return this.presenter; }
+    public DigitViewerPresenter getPresenter() { return this.presenter; }
 
     public void displayDigit(final int digit) {
 
@@ -80,6 +82,10 @@ public class NumberFlashTextView extends android.support.v7.widget.AppCompatText
         setAlpha(1);
         setTextSize(40f);
         setSingleLine(false);
+    }
+
+    public void showGameOverState() {
+        setText("");
     }
 
     public void refreshRecallData(char[] recallData) {

@@ -2,7 +2,6 @@ package com.mastersofmemory.flashnumbers;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -17,13 +16,11 @@ import butterknife.ButterKnife;
 
 public class NumberFlashActivity extends AppCompatActivity implements NumberFlashGameStateListener {
 
-    @BindView(R.id.toolbar)
-    NumberFlashToolbarView toolbar;
-
-    int n=4;
+    @BindView(R.id.toolbar) NumberFlashToolbarView toolbar;
 
     private static int activityInstanceCount = 0;
     private boolean destroyActivity = true;
+    private GameData data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +56,7 @@ public class NumberFlashActivity extends AppCompatActivity implements NumberFlas
 
         SettingLoaderImpl settingLoader = new SettingLoaderImpl();
         Settings settings = settingLoader.getSettings(this);
-        this.onChallengeLoaded(settings);
+        this.onLoad(new NumberFlashConfig(settings));
     }
 
     /*
@@ -69,7 +66,6 @@ public class NumberFlashActivity extends AppCompatActivity implements NumberFlas
     protected void onRestoreInstanceState(Bundle inState) {
         super.onRestoreInstanceState(inState);
         Log.d("ML.NumberFlashActivity", "onRestoreInstanceState()");
-        NumberFlashBus.getBus().onLoad(new NumberFlashConfig(4), inState);
     }
 
     @Override
@@ -163,28 +159,27 @@ public class NumberFlashActivity extends AppCompatActivity implements NumberFlas
 
 
 
-
-
-
-
-
-
     ////////// Game State Life Cycle Listener ////////////
 
+    public void onLoad(NumberFlashConfig config) {
+        data = new GameData(config);
+        NumberFlashBus.getBus().onPreMemorization(data);
+    }
+
     @Override
-    public void onLoad(NumberFlashConfig config, Bundle savedInstanceState) {}
+    public void onPreMemorization(GameData data) {}
 
     @Override
     public void onMemorizationStart() {}
 
     @Override
-    public void onTransitionToRecall() {}
+    public void onRecallStart() {}
 
     @Override
     public void onRecallComplete(final NumberFlashResult result) {
 
-        if (toolbar.getNumLivesRemaining() == 1 && !result.isCorrect()) {
-            toolbar.loseLife();
+        if (data.getNumLivesRemaining() == 1 && !result.isCorrect()) {
+            data.loseLife();
 
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable()
@@ -199,11 +194,7 @@ public class NumberFlashActivity extends AppCompatActivity implements NumberFlas
             return;
         }
         else if (!result.isCorrect()) {
-            toolbar.loseLife();
-            n--;
-        }
-        else {
-            n++;
+            data.loseLife();
         }
 
         final Handler handler = new Handler();
@@ -213,14 +204,10 @@ public class NumberFlashActivity extends AppCompatActivity implements NumberFlas
             public void run()
             {
                 NumberFlashBus.gameState = GameState.PRE_MEMORIZATION;
-                NumberFlashBus.getBus().onLoad(new NumberFlashConfig(n), null);
+                data.resetTo(result.isCorrect() ? data.getNumDigitsToAttempt() + 1 : data.getNumDigitsToAttempt() - 1);
+                NumberFlashBus.getBus().onPreMemorization(data);
             }
         }, 1500);
-    }
-
-    @Override
-    public void onPlayAgain(NumberFlashConfig config) {
-        Log.d("ML.NumberFlashActivity", "onPlayAgain()");
     }
 
     @Override
@@ -230,19 +217,4 @@ public class NumberFlashActivity extends AppCompatActivity implements NumberFlas
 
     @Override
     public void onShutdown() {}
-
-    public void onChallengeLoaded(final Settings settings) {
-        //Log.d("ML.NumberFlashActivity", "onChallengeLoaded(): " + challenge.getTitle());
-
-        NumberFlashBus.getBus().onLoad(new NumberFlashConfig(settings), null);
-
-        /*
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                NumberFlashBus.getBus().onLoad(new NumberFlashConfig(settings), null);
-            }
-        }, 500);
-        */
-    }
 }

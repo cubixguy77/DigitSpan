@@ -1,14 +1,12 @@
 package com.mastersofmemory.flashnumbers;
 
-import android.os.Bundle;
+public interface NumberFlashGameStateListener {
 
-import com.mastersofmemory.flashnumbers.settings.Settings;
-
-public interface NumberFlashGameStateListener extends GameStateListener {
-
-    void onLoad(NumberFlashConfig config, Bundle savedInstanceState);
+    void onPreMemorization(GameData data);
+    void onMemorizationStart();
+    void onRecallStart();
     void onRecallComplete(NumberFlashResult result);
-    void onPlayAgain(NumberFlashConfig config);
     void onGameOver();
+    void onShutdown();
 
 }

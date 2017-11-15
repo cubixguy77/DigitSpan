@@ -6,12 +6,22 @@ public class GameData {
     private char[] memoryDigits;
     private char[] recallDigits;
     private int numDigitsRecalled;
+    private int numDigitsAchieved;
+    private int numLivesRemaining;
+    private int numDigitsAttempted;
 
     GameData(NumberFlashConfig config) {
         this.config = config;
-        this.memoryDigits = MemoryDataSetFactory.getDecimalNumberData(config.getNumInitialDigits(), true);
-        this.recallDigits = new char[config.getNumInitialDigits()];
         this.numDigitsRecalled = 0;
+        this.numDigitsAchieved = 0;
+        this.numLivesRemaining = 3;
+        this.numDigitsAttempted = config.getNumInitialDigits();
+        initializeMemoryRecallData(numDigitsAttempted);
+    }
+
+    private void initializeMemoryRecallData(int numDigits) {
+        this.memoryDigits = MemoryDataSetFactory.getDecimalNumberData(numDigits, true);
+        this.recallDigits = new char[numDigits];
     }
 
     public int getNumDigitsRecalled() {
@@ -19,7 +29,7 @@ public class GameData {
     }
 
     public int getNumDigitsToAttempt() {
-        return this.config.getNumInitialDigits();
+        return this.numDigitsAttempted;
     }
 
     public void recallDigit(char digit) {
@@ -40,7 +50,7 @@ public class GameData {
         return memoryDigits;
     }
 
-    char getMemoryDigit(int index) {
+    public char getMemoryDigit(int index) {
         return memoryDigits[index];
     }
 
@@ -50,5 +60,29 @@ public class GameData {
 
     public NumberFlashConfig getConfig() {
         return config;
+    }
+
+    public void registerDigitsAchieved(int numDigitsAchieved) {
+        if (numDigitsAchieved > this.numDigitsAchieved) {
+            this.numDigitsAchieved = numDigitsAchieved;
+        }
+    }
+
+    public int getNumDigitsAchieved() {
+        return numDigitsAchieved;
+    }
+
+    void loseLife() {
+        NumberFlashBus.getBus().onLifeLost(--this.numLivesRemaining);
+    }
+
+    public int getNumLivesRemaining() {
+        return this.numLivesRemaining;
+    }
+
+    void resetTo(int numDigitsToAttempt) {
+        this.numDigitsAttempted = numDigitsToAttempt;
+        this.numDigitsRecalled = 0;
+        this.initializeMemoryRecallData(numDigitsAttempted);
     }
 }

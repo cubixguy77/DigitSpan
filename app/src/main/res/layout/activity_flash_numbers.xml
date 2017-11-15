@@ -18,8 +18,8 @@
     </android.support.design.widget.AppBarLayout>
 
     <fragment
-        android:id="@+id/mainImagesList"
-        android:name="com.mastersofmemory.flashnumbers.NumberFlashFragment"
+        android:id="@+id/digitFragment"
+        android:name="com.mastersofmemory.flashnumbers.digitviewer.DigitView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

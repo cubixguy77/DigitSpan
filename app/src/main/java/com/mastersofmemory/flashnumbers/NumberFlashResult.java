@@ -10,7 +10,7 @@ public class NumberFlashResult {
         this.numDigitsAttempted = memory.length;
     }
 
-    boolean isCorrect() {
+    public boolean isCorrect() {
         return this.isCorrect;
     }
 

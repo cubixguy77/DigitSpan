@@ -3,26 +3,25 @@ package com.mastersofmemory.flashnumbers.toolbar;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.mastersofmemory.flashnumbers.GameData;
 import com.mastersofmemory.flashnumbers.NumberFlashBus;
-import com.mastersofmemory.flashnumbers.NumberFlashConfig;
 import com.mastersofmemory.flashnumbers.NumberFlashGameStateListener;
 import com.mastersofmemory.flashnumbers.NumberFlashResult;
 import com.mastersofmemory.flashnumbers.R;
 import com.mastersofmemory.flashnumbers.SaveInstanceStateListener;
 
-public class NumberFlashToolbarView extends BaseToolbarView implements NumberFlashGameStateListener, SaveInstanceStateListener {
+public class NumberFlashToolbarView extends BaseToolbarView implements NumberFlashGameStateListener, SaveInstanceStateListener, LifeListener {
 
     private MenuItem heartOne;
     private MenuItem heartTwo;
     private MenuItem heartThree;
 
-    private int numLivesRemaining = 3;
+    private GameData data;
 
     public NumberFlashToolbarView(Context context) {
         super(context);
@@ -53,18 +52,11 @@ public class NumberFlashToolbarView extends BaseToolbarView implements NumberFla
         heartOne = menu.findItem(R.id.heart_one);
         heartTwo = menu.findItem(R.id.heart_two);
         heartThree = menu.findItem(R.id.heart_three);
+
+        refreshToolbarIcon(data.getNumLivesRemaining());
     }
 
-    public int getNumLivesRemaining() {
-        return this.numLivesRemaining;
-    }
-
-    public void loseLife() {
-        this.numLivesRemaining--;
-        refreshToolbarIcon();
-    }
-
-    private void refreshToolbarIcon() {
+    private void refreshToolbarIcon(int numLivesRemaining) {
         switch (numLivesRemaining) {
             case 0:
                 heartOne.setIcon(R.drawable.icon_heart_empty);
@@ -90,31 +82,19 @@ public class NumberFlashToolbarView extends BaseToolbarView implements NumberFla
         }
     }
 
-
     @Override
-    public void onLoad(NumberFlashConfig config, Bundle savedInstanceState) {
-
+    public void onPreMemorization(GameData data) {
+        this.data = data;
     }
 
     @Override
-    public void onMemorizationStart() {
-        refreshToolbarIcon();
-    }
+    public void onMemorizationStart() {}
 
     @Override
-    public void onTransitionToRecall() {
-        refreshToolbarIcon();
-    }
+    public void onRecallStart() {}
 
     @Override
-    public void onRecallComplete(NumberFlashResult result) {
-    }
-
-    @Override
-    public void onPlayAgain(NumberFlashConfig config) {
-        this.numLivesRemaining = 3;
-        refreshToolbarIcon();
-    }
+    public void onRecallComplete(NumberFlashResult result) {}
 
     @Override
     public void onGameOver() {}
@@ -126,6 +106,10 @@ public class NumberFlashToolbarView extends BaseToolbarView implements NumberFla
     public void onRestoreInstanceState(Bundle inState) {}
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {}
+
+    @Override
+    public void onLifeLost(int livesRemaining) {
+        refreshToolbarIcon(livesRemaining);
     }
 }

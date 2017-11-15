@@ -2,11 +2,11 @@ package com.mastersofmemory.flashnumbers;
 
 import android.os.Bundle;
 
-import com.mastersofmemory.flashnumbers.settings.Settings;
+import com.mastersofmemory.flashnumbers.toolbar.LifeListener;
 
 import java.util.ArrayList;
 
-public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanceStateListener, RecallDataChangeListener {
+public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanceStateListener, RecallDataChangeListener, LifeListener {
 
     private static NumberFlashBus instance = null;
     private ArrayList<Object> observers;
@@ -48,14 +48,14 @@ public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanc
 
     static void destroy() {
     }
-    
+
     @Override
-    public void onLoad(NumberFlashConfig config, Bundle savedInstanceState) {
+    public void onPreMemorization(GameData data) {
         gameState = GameState.PRE_MEMORIZATION;
 
         for (Object observer : observers) {
             if (observer != null && observer instanceof NumberFlashGameStateListener) {
-                ((NumberFlashGameStateListener) observer).onLoad(config, savedInstanceState);
+                ((NumberFlashGameStateListener) observer).onPreMemorization(data);
             }
         }
     }
@@ -72,12 +72,12 @@ public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanc
     }
 
     @Override
-    public void onTransitionToRecall() {
+    public void onRecallStart() {
         gameState = GameState.RECALL;
 
         for (Object observer : observers) {
             if (observer != null && observer instanceof NumberFlashGameStateListener) {
-                ((NumberFlashGameStateListener) observer).onTransitionToRecall();
+                ((NumberFlashGameStateListener) observer).onRecallStart();
             }
         }
     }
@@ -87,15 +87,6 @@ public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanc
         for (Object observer : observers) {
             if (observer != null && observer instanceof NumberFlashGameStateListener) {
                 ((NumberFlashGameStateListener) observer).onRecallComplete(result);
-            }
-        }
-    }
-
-    @Override
-    public void onPlayAgain(NumberFlashConfig config) {
-        for (Object observer : observers) {
-            if (observer != null && observer instanceof NumberFlashGameStateListener) {
-                ((NumberFlashGameStateListener) observer).onPlayAgain(config);
             }
         }
     }
@@ -142,6 +133,15 @@ public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanc
         for (Object observer : observers) {
             if (observer != null && observer instanceof RecallDataChangeListener) {
                 ((RecallDataChangeListener) observer).onRecallDataChanged(recallData);
+            }
+        }
+    }
+
+    @Override
+    public void onLifeLost(int livesRemaining) {
+        for (Object observer : observers) {
+            if (observer != null && observer instanceof LifeListener) {
+                ((LifeListener) observer).onLifeLost(livesRemaining);
             }
         }
     }

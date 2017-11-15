@@ -1,12 +1,9 @@
 package com.mastersofmemory.flashnumbers.keyboard;
 
-import android.os.Bundle;
 import android.os.Handler;
 
 import com.mastersofmemory.flashnumbers.GameData;
-import com.mastersofmemory.flashnumbers.GameState;
 import com.mastersofmemory.flashnumbers.NumberFlashBus;
-import com.mastersofmemory.flashnumbers.NumberFlashConfig;
 import com.mastersofmemory.flashnumbers.NumberFlashGameStateListener;
 import com.mastersofmemory.flashnumbers.NumberFlashResult;
 
@@ -51,12 +48,17 @@ public class KeyboardPresenter implements Keyboard.Presenter, NumberFlashGameSta
         }
     }
 
+    @Override
+    public void onPreMemorization(GameData data) {
+        this.data = data;
+        keyboard.disable();
+    }
 
     @Override
     public void onMemorizationStart() {}
 
     @Override
-    public void onTransitionToRecall() {
+    public void onRecallStart() {
         keyboard.enable();
     }
 
@@ -66,26 +68,9 @@ public class KeyboardPresenter implements Keyboard.Presenter, NumberFlashGameSta
     }
 
     @Override
-    public void onLoad(NumberFlashConfig config, Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            if (NumberFlashBus.gameState == GameState.RECALL) {
-                keyboard.enable();
-            } else {
-                keyboard.disable();
-            }
-        }
-        else {
-            keyboard.disable();
-        }
-    }
-
-    @Override
     public void onRecallComplete(NumberFlashResult result) {
         keyboard.disable();
     }
-
-    @Override
-    public void onPlayAgain(NumberFlashConfig config) {}
 
     @Override
     public void onGameOver() {}
