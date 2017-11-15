@@ -73,11 +73,13 @@ public class GameData {
     }
 
     public void resetLives() {
+        int numLivesBefore = this.numLivesRemaining;
         this.numLivesRemaining = 3;
+        NumberFlashBus.getBus().onLivesUpdated(numLivesBefore, this.numLivesRemaining);
     }
 
     void loseLife() {
-        NumberFlashBus.getBus().onLifeLost(--this.numLivesRemaining);
+        NumberFlashBus.getBus().onLivesUpdated(this.numLivesRemaining, --this.numLivesRemaining);
     }
 
     public int getNumLivesRemaining() {

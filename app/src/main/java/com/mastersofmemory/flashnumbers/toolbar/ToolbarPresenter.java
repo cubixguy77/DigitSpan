@@ -15,8 +15,8 @@ public class ToolbarPresenter implements NumberFlashGameStateListener, LifeListe
     }
 
     @Override
-    public void onLifeLost(int livesRemaining) {
-        toolbar.displayLivesRemaining(livesRemaining);
+    public void onLivesUpdated(int numLivesBefore, int numLivesAfter) {
+        toolbar.displayLivesRemaining(numLivesAfter);
     }
 
     @Override

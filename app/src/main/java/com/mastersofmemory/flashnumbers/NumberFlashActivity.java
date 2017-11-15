@@ -45,6 +45,12 @@ public class NumberFlashActivity extends AppCompatActivity {
         this.onLoad(new NumberFlashConfig(settings), null);
     }
 
+    public void onLoad(NumberFlashConfig config, Bundle bundle) {
+        GameData data = new GameData(config);
+        NumberFlashBus.getBus().onPreMemorization(data);
+        new GameStateManager(data);
+    }
+
     /*
      * This method is called between onStart() and onPostCreate(Bundle).
      */
@@ -65,7 +71,6 @@ public class NumberFlashActivity extends AppCompatActivity {
         super.onPause();
         Log.d("ML.NumberFlashActivity", "onPause()");
     }
-
 
     /*
      * If called, this method will occur before onStop().
@@ -105,11 +110,5 @@ public class NumberFlashActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         toolbar.onPrepareOptionsMenu(menu);
         return true;
-    }
-
-    public void onLoad(NumberFlashConfig config, Bundle bundle) {
-        GameData data = new GameData(config);
-        NumberFlashBus.getBus().onPreMemorization(data);
-        new GameStateManager(data);
     }
 }

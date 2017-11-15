@@ -49,8 +49,6 @@ public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanc
 
     @Override
     public void onPreMemorization(GameData data) {
-        gameState = GameState.PRE_MEMORIZATION;
-
         for (Object observer : observers) {
             if (observer != null && observer instanceof NumberFlashGameStateListener) {
                 ((NumberFlashGameStateListener) observer).onPreMemorization(data);
@@ -60,8 +58,6 @@ public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanc
 
     @Override
     public void onMemorizationStart() {
-        gameState = GameState.MEMORIZATION;
-
         for (Object observer : observers) {
             if (observer != null && observer instanceof NumberFlashGameStateListener) {
                 ((NumberFlashGameStateListener) observer).onMemorizationStart();
@@ -71,8 +67,6 @@ public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanc
 
     @Override
     public void onRecallStart() {
-        gameState = GameState.RECALL;
-
         for (Object observer : observers) {
             if (observer != null && observer instanceof NumberFlashGameStateListener) {
                 ((NumberFlashGameStateListener) observer).onRecallStart();
@@ -91,7 +85,6 @@ public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanc
 
     @Override
     public void onGameOver() {
-        gameState = GameState.REVIEW;
         for (Object observer : observers) {
             if (observer != null && observer instanceof NumberFlashGameStateListener) {
                 ((NumberFlashGameStateListener) observer).onGameOver();
@@ -136,10 +129,10 @@ public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanc
     }
 
     @Override
-    public void onLifeLost(int livesRemaining) {
+    public void onLivesUpdated(int numLivesBefore, int numLivesAfter) {
         for (Object observer : observers) {
             if (observer != null && observer instanceof LifeListener) {
-                ((LifeListener) observer).onLifeLost(livesRemaining);
+                ((LifeListener) observer).onLivesUpdated(numLivesBefore, numLivesAfter);
             }
         }
     }
