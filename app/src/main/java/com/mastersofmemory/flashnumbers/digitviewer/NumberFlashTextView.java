@@ -67,7 +67,7 @@ public class NumberFlashTextView extends android.support.v7.widget.AppCompatText
         setText("");
         setAlpha(0);
         loadScreenSize();
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, displayWidthDP / 1.7f);
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, displayWidthDP / 1.8f);
         setSingleLine();
     }
 
@@ -83,13 +83,13 @@ public class NumberFlashTextView extends android.support.v7.widget.AppCompatText
     }
 
     public void refreshRecallData(char[] recallData) {
-        setText(new String(recallData));
+        setText(new String(recallData).replaceAll("(.{10})", "$1\n")); // Insert new line every 10 digits
     }
 
     private void loadScreenSize() {
         if (displayWidthDP == 0) {
             DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-            displayWidthDP = Math.min(displayMetrics.widthPixels, displayMetrics.heightPixels) / displayMetrics.density;
+            displayWidthDP = (displayMetrics.widthPixels > displayMetrics.heightPixels ? displayMetrics.widthPixels / 2 : displayMetrics.widthPixels)  / displayMetrics.density;
         }
     }
 }
