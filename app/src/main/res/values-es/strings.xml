@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Números</string>
-    <string name="numDigits">%d Cifras</string>
-    <string name="numDigitsAchieved">Alcanzaste %d cifras!</string>
+    <string name="numDigits">%d Dígitos</string>
+    <string name="numDigitsAchieved">Alcanzaste %d dígitos!</string>
 </resources>
