@@ -15,9 +15,4 @@
         <item name="android:windowBackground">@drawable/branded_logo</item>
     </style>
 
-    <style name="PlayButton" parent="Widget.AppCompat.Button.Borderless">
-        <item name="colorControlHighlight">@color/colorAccent</item>
-        <item name="colorButtonNormal">#76ff03</item>
-    </style>
-
 </resources>
