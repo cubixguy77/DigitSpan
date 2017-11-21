@@ -25,15 +25,6 @@ public class NumberFlashToolbarView extends BaseToolbarView implements Toolbar.V
     public void onCreateOptionsMenu(Menu menu, Context context) {
         System.out.println("onCreateOptionsMenu");
         ((AppCompatActivity) context).getMenuInflater().inflate(R.menu.menu_flash_numbers, menu);
-
-        /*
-        setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Settings clicked");
-            }
-        });
-        */
     }
 
     public void onPrepareOptionsMenu(Menu menu) {

@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import android.view.Menu;
 
 import com.mastersofmemory.flashnumbers.NumberFlashBus;
-import com.mastersofmemory.flashnumbers.R;
 
 public abstract class BaseToolbarView extends android.support.v7.widget.Toolbar {
 
@@ -22,10 +21,6 @@ public abstract class BaseToolbarView extends android.support.v7.widget.Toolbar 
     public void init(AppCompatActivity context) {
         context.setSupportActionBar(this);
         ActionBar supportActionBar = context.getSupportActionBar();
-        if (supportActionBar != null) {
-            supportActionBar.setDisplayHomeAsUpEnabled(true);
-            supportActionBar.setHomeAsUpIndicator(R.drawable.icon_settings);
-        }
 
         NumberFlashBus.getBus().subscribe(this);
         assert supportActionBar != null;
