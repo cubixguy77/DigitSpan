@@ -8,4 +8,6 @@
     <color name="colorPrimaryLight">#C8E6C9</color>
 
     <color name="colorAccent">#8BC34A</color>
+
+    <color name="ic_launcher_background">@color/colorPrimary</color>
 </resources>
