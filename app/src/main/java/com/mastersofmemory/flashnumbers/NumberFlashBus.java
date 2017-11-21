@@ -3,6 +3,12 @@ package com.mastersofmemory.flashnumbers;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.mastersofmemory.flashnumbers.digitviewer.RecallDataChangeListener;
+import com.mastersofmemory.flashnumbers.gamestate.GameData;
+import com.mastersofmemory.flashnumbers.gamestate.GameState;
+import com.mastersofmemory.flashnumbers.gamestate.NumberFlashGameStateListener;
+import com.mastersofmemory.flashnumbers.gamestate.NumberFlashResult;
+import com.mastersofmemory.flashnumbers.gamestate.SaveInstanceStateListener;
 import com.mastersofmemory.flashnumbers.toolbar.LifeListener;
 
 import java.util.ArrayList;
@@ -33,10 +39,6 @@ public class NumberFlashBus implements NumberFlashGameStateListener, SaveInstanc
         if (observer != null && !observers.contains(observer)) {
             this.observers.add(observer);
         }
-    }
-
-    boolean hasObservers() {
-        return !observers.isEmpty();
     }
 
     static void unsubscribeAll() {

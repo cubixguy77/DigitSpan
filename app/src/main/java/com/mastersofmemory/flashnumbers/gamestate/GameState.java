@@ -1,4 +1,4 @@
-package com.mastersofmemory.flashnumbers;
+package com.mastersofmemory.flashnumbers.gamestate;
 
 public enum GameState {
 

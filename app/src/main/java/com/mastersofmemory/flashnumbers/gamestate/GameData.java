@@ -1,6 +1,10 @@
-package com.mastersofmemory.flashnumbers;
+package com.mastersofmemory.flashnumbers.gamestate;
 
 import android.os.Bundle;
+
+import com.mastersofmemory.flashnumbers.datageneration.MemoryDataSetFactory;
+import com.mastersofmemory.flashnumbers.NumberFlashBus;
+import com.mastersofmemory.flashnumbers.settings.NumberFlashConfig;
 
 public class GameData {
 
@@ -12,7 +16,7 @@ public class GameData {
     private int numLivesRemaining;
     private int numDigitsAttempted;
 
-    GameData(NumberFlashConfig config, Bundle bundle) {
+    public GameData(NumberFlashConfig config, Bundle bundle) {
         this.config = config;
         this.numDigitsRecalled = 0;
         this.numDigitsAchieved = bundle == null ? 0 : bundle.getInt("GameData.numDigitsAchieved", 0);

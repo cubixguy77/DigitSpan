@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
-import com.mastersofmemory.flashnumbers.GameState;
+import com.mastersofmemory.flashnumbers.gamestate.GameState;
 import com.mastersofmemory.flashnumbers.NumberFlashBus;
 
 public class NumberFlashTextView extends android.support.v7.widget.AppCompatTextView {

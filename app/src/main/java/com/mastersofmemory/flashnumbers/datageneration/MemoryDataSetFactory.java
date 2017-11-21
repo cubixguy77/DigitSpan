@@ -1,10 +1,10 @@
-package com.mastersofmemory.flashnumbers;
+package com.mastersofmemory.flashnumbers.datageneration;
 
 import java.util.Random;
 
-class MemoryDataSetFactory {
+public class MemoryDataSetFactory {
 
-    static char[] getDecimalNumberData(int numDigits, boolean eliminateRepeats) {
+    public static char[] getDecimalNumberData(int numDigits, boolean eliminateRepeats) {
         char[] data = new char[numDigits];
         Random rand = new Random();
 

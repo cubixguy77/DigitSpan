@@ -1,7 +1,5 @@
 package com.mastersofmemory.flashnumbers.keyboard;
 
-import com.mastersofmemory.flashnumbers.GameData;
-
 public interface Keyboard {
 
     interface View {

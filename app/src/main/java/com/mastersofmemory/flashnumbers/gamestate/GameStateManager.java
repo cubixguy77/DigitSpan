@@ -1,13 +1,15 @@
-package com.mastersofmemory.flashnumbers;
+package com.mastersofmemory.flashnumbers.gamestate;
 
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.mastersofmemory.flashnumbers.NumberFlashBus;
 
 public class GameStateManager implements NumberFlashGameStateListener, SaveInstanceStateListener {
 
     private GameData data;
 
-    GameStateManager(GameData data) {
+    public GameStateManager(GameData data) {
         this.data = data;
         NumberFlashBus.getBus().subscribe(this);
     }

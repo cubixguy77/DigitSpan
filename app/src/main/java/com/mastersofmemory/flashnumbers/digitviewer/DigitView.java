@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mastersofmemory.flashnumbers.GameState;
+import com.mastersofmemory.flashnumbers.gamestate.GameState;
 import com.mastersofmemory.flashnumbers.NumberFlashBus;
 import com.mastersofmemory.flashnumbers.R;
 import com.mastersofmemory.flashnumbers.keyboard.KeyboardPresenter;

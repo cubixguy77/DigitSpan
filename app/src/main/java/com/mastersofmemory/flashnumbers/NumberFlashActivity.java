@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 
+import com.mastersofmemory.flashnumbers.gamestate.GameData;
+import com.mastersofmemory.flashnumbers.gamestate.GameStateManager;
+import com.mastersofmemory.flashnumbers.settings.NumberFlashConfig;
 import com.mastersofmemory.flashnumbers.settings.SettingLoaderImpl;
 import com.mastersofmemory.flashnumbers.settings.Settings;
 import com.mastersofmemory.flashnumbers.toolbar.NumberFlashToolbarView;

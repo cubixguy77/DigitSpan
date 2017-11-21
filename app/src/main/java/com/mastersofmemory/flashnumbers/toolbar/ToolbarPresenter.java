@@ -1,9 +1,9 @@
 package com.mastersofmemory.flashnumbers.toolbar;
 
-import com.mastersofmemory.flashnumbers.GameData;
+import com.mastersofmemory.flashnumbers.gamestate.GameData;
 import com.mastersofmemory.flashnumbers.NumberFlashBus;
-import com.mastersofmemory.flashnumbers.NumberFlashGameStateListener;
-import com.mastersofmemory.flashnumbers.NumberFlashResult;
+import com.mastersofmemory.flashnumbers.gamestate.NumberFlashGameStateListener;
+import com.mastersofmemory.flashnumbers.gamestate.NumberFlashResult;
 
 public class ToolbarPresenter implements NumberFlashGameStateListener, LifeListener {
 

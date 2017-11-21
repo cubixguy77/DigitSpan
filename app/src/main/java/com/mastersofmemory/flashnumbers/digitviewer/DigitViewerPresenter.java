@@ -2,11 +2,10 @@ package com.mastersofmemory.flashnumbers.digitviewer;
 
 import android.os.Handler;
 
-import com.mastersofmemory.flashnumbers.GameData;
+import com.mastersofmemory.flashnumbers.gamestate.GameData;
 import com.mastersofmemory.flashnumbers.NumberFlashBus;
-import com.mastersofmemory.flashnumbers.NumberFlashGameStateListener;
-import com.mastersofmemory.flashnumbers.NumberFlashResult;
-import com.mastersofmemory.flashnumbers.RecallDataChangeListener;
+import com.mastersofmemory.flashnumbers.gamestate.NumberFlashGameStateListener;
+import com.mastersofmemory.flashnumbers.gamestate.NumberFlashResult;
 
 public class DigitViewerPresenter implements DigitViewer.Presenter, NumberFlashGameStateListener, RecallDataChangeListener {
 
